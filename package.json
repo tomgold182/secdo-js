@@ -25,5 +25,9 @@
   "bugs": {
     "url": "https://github.com/tomgold182/secdo-js/issues"
   },
-  "homepage": "https://github.com/tomgold182/secdo-js#readme"
+  "homepage": "https://github.com/tomgold182/secdo-js#readme",
+  "dependencies": {
+    "dotenv": "^6.0.0",
+    "request": "^2.88.0"
+  }
 }
