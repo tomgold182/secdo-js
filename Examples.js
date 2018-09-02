@@ -1,6 +1,33 @@
 require('dotenv').load();
+
 var Secdo=require('./Secdo')
-var IOC=require('./IOC')
+
+var IOC = {
+    artifactTypes: {
+        hostName: 'hostname',
+        MD5: 'md5hash',
+        fileName: 'filename',
+        complex: 'complex',
+        fullPath: 'fullpath',
+        destinationIP: 'dest_ip',
+        mixed: 'mixed'
+    },
+    operations: {
+        case:'CASE',
+        iceBlock: 'ICEBLOCK',
+        isolate: 'ISOLATE',
+        blackList: 'BLACKLIST',
+        syslog: 'SYSLOG',
+        report: 'REPORT'
+    },
+    severity: {
+        high: 'HIGH',
+        medium: 'MEDIUM',
+        informational: 'INFORMATIONAL',
+        low: 'LOW'
+    }
+}
+
 
 var secdoClient = new Secdo({
     serverName: process.env.server_name,
@@ -40,8 +67,9 @@ secdoClient.isolateHost('desktop')
     console.log(ex)
 })
 
+
 var newIOC = {
-    //IMPORTANT: severity , operations and artifacts_type gets only certain parameters. That why I created the IOC.js file ,it acts like an Enum for these parameters.Please use it to avoid mistakes
+    //IMPORTANT: severity , operations and artifacts_type gets only certain parameters. That why I created the IOC var  ,it acts like an Enum for these parameters.Please use it to avoid mistakes
     company: "secdo",
     severity: IOC.severity.medium,
     ioc_data: "TestIOC\n  127.0.0.1",

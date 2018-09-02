@@ -27,17 +27,16 @@ secdo-js is currently supporting the following actions:
 ~~~ 
 npm install --save secdo-js
 ~~~
-2. require the Secdo class. If you are going to use the IOC dunctionalities , import also the IOC module.
+2. require the Secdo class. If you are going to use the IOC functionalities , you can use the IOC var (which acts like an enum and provides the available params for the load IOC method) from the examples.js file to avoid mistakes.
 ~~~
-var Secdo=require('./Secdo')
-var IOC=require('./IOC')
+var Secdo=require('Secdo')
 ~~~
  3.Set the connection
 ~~~
 var secdoClient = new Secdo({
-    serverName: process.env.server_name,
-    apiKey: process.env.api_key,
-    company: process.env.company
+    serverName: 'secdo.local',
+    apiKey: 'asd23SA3FFDds',
+    company: 'localCorp'
 })
 ~~~
 
