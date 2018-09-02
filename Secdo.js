@@ -174,7 +174,7 @@ isolateHost(host,comment="Automated Isolation"){
               })
           })
     }
-    resetBlackListState(ioc){
+    resetBlackListState(){
         const options = {
             url: `https://${this.serverName}/${this._run_command_api_URL}`,
             method: "POST",

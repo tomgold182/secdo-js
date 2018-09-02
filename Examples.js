@@ -41,16 +41,17 @@ secdoClient.isolateHost('desktop')
 })
 
 var newIOC = {
+    //IMPORTANT: severity , operations and artifacts_type gets only certain parameters. That why I created the IOC.js file ,it acts like an Enum for these parameters.Please use it to avoid mistakes
     company: "secdo",
     severity: IOC.severity.medium,
-    ioc_data: "Tom\n 127.18.0.3",
-    source: "Secdo  api",
+    ioc_data: "TestIOC\n  127.0.0.1",
+    source: "Secdo-js  client",
     operations: [IOC.operations.iceBlock,IOC.operations.case],
     artifacts_type: IOC.artifactTypes.mixed,
     comment: "This is my comment"
 }
 
-secdoClient.loadIOC(newIOC)
+secdoClient.loadIOC(newIOC) // Adds a new IOC to the system
 .then((result)=>
 {console.log(result)
 })
