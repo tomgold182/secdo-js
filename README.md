@@ -10,6 +10,7 @@ Simple Secdo (Now Palo Alto) client which gives you the ability to perform vario
 ### Supported functionalities: ###
 
 secdo-js is currently supporting the following actions: 
+
 | Method | Description | Input | Successful Output 
 | ------ | ------ | ------ | ------ |
 | getAgents() | Retrieves list of all the agents in the system | - | Json formatted list of agents
