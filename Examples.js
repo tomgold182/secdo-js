@@ -8,6 +8,10 @@ var secdoClient = new Secdo({
     company: process.env.company
 })
 
-secdoClient.getAgents().then((agentList)=> {
-console.dir(agentList)
-})
+// secdoClient.getAgents().then((agentList)=> {
+// console.dir(agentList)
+// })
+
+secdoClient.isAgentInstalledOnHost('192.168.0.19').then((result)=> {
+    console.log('Is agent installed on this host: ' + result)
+    })

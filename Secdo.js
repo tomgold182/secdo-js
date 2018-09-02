@@ -5,6 +5,7 @@ class Secdo{
         this.apiKey=connectionDetails.apiKey
         this.company=connectionDetails.company
         this._run_command_api_URL='publicapiv2/run/command/'
+        this.commands = {getAgents:'get_agents'}
     }
     getAgents() {
         const options = {
@@ -12,7 +13,7 @@ class Secdo{
             method: "POST",
             headers: {
                 'Content-Type': 'application/json',
-                'COMMAND-NAME': 'get_agents',
+                'COMMAND-NAME': commands.getAgents,
                 'API-KEY': this.apiKey
             } ,
             body: { company: this.company },
@@ -20,8 +21,6 @@ class Secdo{
             rejectUnauthorized:false
           }; 
           return new Promise(function(resolve,reject){
-              var parsedBody;
-
               request.post(options,function(err,response,body){
                   if (err){
                       return reject(err)
@@ -33,5 +32,38 @@ class Secdo{
               })
           })
     }
+    isAgentInstalledOnHost(host){
+        const options = {
+            url: `https://${this.serverName}/${this._run_command_api_URL}`,
+            method: "POST",
+            headers: {
+                'Content-Type': 'application/json',
+                'COMMAND-NAME': this.commands.getAgents,
+                'API-KEY': this.apiKey
+            } ,
+            body: { company: this.company },
+            json: true ,
+            rejectUnauthorized:false
+          }; 
+          return new Promise(function(resolve,reject){
+              request.post(options,function(err,response,body){
+                  if (err){
+                      return reject(err)
+                  }
+				  if(response.statusCode>=400){
+                      return reject(body)
+                  }
+                  var agents=body.agents
+                
+                  agents.forEach(function(agent) {
+                      if (agent.interfaces.includes(host) || agent.hostName == host) {
+                          return resolve(true)
+                      }
+                  })
+                  return resolve(false)         
+              })
+          })
+    }
+
 }
 module.exports = Secdo
