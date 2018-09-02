@@ -8,33 +8,37 @@ var secdoClient = new Secdo({
     company: process.env.company
 })
 
-//  secdoClient.getAgents().then((agentList)=> {
-//     console.dir(agentList)
-//     })
-//     .catch((ex)=>{
-//         console.log(ex)
-// })
+secdoClient.getAgents()
+.then((agentList)=> {
+    console.dir(agentList)
+})
+.catch((ex)=>{
+    console.log(ex)
+})
 
-// secdoClient.isAgentInstalledOnHost('5.4.5.6').then((result)=> {
-//     console.log('Is agent installed on this host: ' + result)
-//     })
-//     .catch((ex)=>{
-//         console.log(ex)
-//     })
+secdoClient.isAgentInstalledOnHost('5.4.5.6')
+.then((result)=> {
+    console.log('Is agent installed on this host: ' + result)
+})
+.catch((ex)=>{
+    console.log(ex)
+})
 
-// secdoClient.getAgentState('host-vm').then((result)=> {
-//     console.log(result)
-//     })
-//     .catch((ex)=>{
-//         console.log(ex)
-//     })
+secdoClient.getAgentState('host-vm')
+.then((result)=> {
+    console.log(result)
+})
+.catch((ex)=>{
+    console.log(ex)
+})
 
-// secdoClient.isolateHost('desktop').then((result)=> {
-//     console.log(result)
-// })
-// .catch((ex)=>{
-//     console.log(ex)
-// })
+secdoClient.isolateHost('desktop')
+.then((result)=> {
+    console.log(result)
+})
+.catch((ex)=>{
+    console.log(ex)
+})
 
 var newIOC = {
     company: "secdo",
@@ -53,3 +57,11 @@ secdoClient.loadIOC(newIOC)
 .catch((ex)=>{
     console.error(ex)
 })
+
+secdoClient.resetBlackListState()
+.then((result)=>{
+    console.log(result)
+})
+.catch((ex=>{
+    console.error(ex)
+}))

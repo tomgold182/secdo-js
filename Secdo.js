@@ -8,7 +8,8 @@ class Secdo{
         this.commands = {
             getAgents:'get_agents',
             isolateHost:'isolate',
-            loadIOC: 'load_ioc'
+            loadIOC: 'load_ioc',
+            resetBlackListState: 'reset_blacklist_state'
         }
     }
     getAgents() {
@@ -152,6 +153,38 @@ isolateHost(host,comment="Automated Isolation"){
                 operations: ioc.operations,
                 artifacts_type: ioc.artifacts_type,
                 comment: ioc.comment
+             },
+            json: true ,
+            rejectUnauthorized:false
+          }; 
+          return new Promise(function(resolve,reject){
+              request.post(options,function(err,response,body){
+                  if (err){
+                      return reject(err)
+                  }
+				  if(response.statusCode>=400){
+                      return reject(body)
+                  }
+                  if (body==true){
+                      return resolve('Success')
+                  }
+                  if (body.reason) {
+                      return reject(body.reason)
+                  } 
+              })
+          })
+    }
+    resetBlackListState(ioc){
+        const options = {
+            url: `https://${this.serverName}/${this._run_command_api_URL}`,
+            method: "POST",
+            headers: {
+                'Content-Type': 'application/json',
+                'COMMAND-NAME': this.commands.resetBlackListState,
+                'API-KEY': this.apiKey
+            } ,
+            body: { 
+                company: this.company,
              },
             json: true ,
             rejectUnauthorized:false
