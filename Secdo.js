@@ -5,7 +5,7 @@ class Secdo{
         this.apiKey=connectionDetails.apiKey
         this.company=connectionDetails.company
         this._run_command_api_URL='publicapiv2/run/command/'
-        this.commands = {getAgents:'get_agents'}
+        this.commands = {getAgents:'get_agents',isolateHost:'isolate'}
     }
     getAgents() {
         const options = {
@@ -13,7 +13,7 @@ class Secdo{
             method: "POST",
             headers: {
                 'Content-Type': 'application/json',
-                'COMMAND-NAME': commands.getAgents,
+                'COMMAND-NAME': this.commands.getAgents,
                 'API-KEY': this.apiKey
             } ,
             body: { company: this.company },
@@ -93,6 +93,41 @@ class Secdo{
                       }
                   })
                   return reject('No agent with ID/Host/IP: '+ host)         
+              })
+          })
+    }
+isolateHost(host,comment="Automated Isolation"){
+        const options = {
+            url: `https://${this.serverName}/${this._run_command_api_URL}`,
+            method: "POST",
+            headers: {
+                'Content-Type': 'application/json',
+                'COMMAND-NAME': this.commands.isolateHost,
+                'API-KEY': this.apiKey
+            } ,
+            body: { 
+                company: this.company,
+                host_name: host,
+                comment: comment
+             },
+            json: true ,
+            rejectUnauthorized:false
+          }; 
+          return new Promise(function(resolve,reject){
+              request.post(options,function(err,response,body){
+                  if (err){
+                      return reject(err)
+                  }
+				  if(response.statusCode>=400){
+                      return reject(body)
+                  }
+                  if (body.reply==true){
+                      return resolve('Success')
+                  }
+                  if (body.reply.error) {
+                      return reject(body.reply.error)
+                  }
+                         
               })
           })
     }

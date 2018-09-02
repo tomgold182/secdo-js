@@ -8,17 +8,30 @@ var secdoClient = new Secdo({
     company: process.env.company
 })
 
-// secdoClient.getAgents().then((agentList)=> {
-// console.dir(agentList)
+//  secdoClient.getAgents().then((agentList)=> {
+//     console.dir(agentList)
+//     })
+//     .catch((ex)=>{
+//         console.log(ex)
 // })
 
-secdoClient.isAgentInstalledOnHost('192.h168.2h00.222').then((result)=> {
-    console.log('Is agent installed on this host: ' + result)
-    })
+// secdoClient.isAgentInstalledOnHost('5.4.5.6').then((result)=> {
+//     console.log('Is agent installed on this host: ' + result)
+//     })
+//     .catch((ex)=>{
+//         console.log(ex)
+//     })
 
-    secdoClient.getAgentState('coronha-vm').then((result)=> {
-        console.log(result)
-        })
-        .catch((ex)=>{
-            console.log(ex)
-        })
+// secdoClient.getAgentState('host-vm').then((result)=> {
+//     console.log(result)
+//     })
+//     .catch((ex)=>{
+//         console.log(ex)
+//     })
+
+secdoClient.isolateHost('desktop').then((result)=> {
+    console.log(result)
+})
+.catch((ex)=>{
+    console.log(ex)
+})
