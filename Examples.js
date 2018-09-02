@@ -12,6 +12,13 @@ var secdoClient = new Secdo({
 // console.dir(agentList)
 // })
 
-secdoClient.isAgentInstalledOnHost('192.168.0.19').then((result)=> {
+secdoClient.isAgentInstalledOnHost('192.h168.2h00.222').then((result)=> {
     console.log('Is agent installed on this host: ' + result)
     })
+
+    secdoClient.getAgentState('coronha-vm').then((result)=> {
+        console.log(result)
+        })
+        .catch((ex)=>{
+            console.log(ex)
+        })
