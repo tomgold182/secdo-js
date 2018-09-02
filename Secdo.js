@@ -5,7 +5,11 @@ class Secdo{
         this.apiKey=connectionDetails.apiKey
         this.company=connectionDetails.company
         this._run_command_api_URL='publicapiv2/run/command/'
-        this.commands = {getAgents:'get_agents',isolateHost:'isolate'}
+        this.commands = {
+            getAgents:'get_agents',
+            isolateHost:'isolate',
+            loadIOC: 'load_ioc'
+        }
     }
     getAgents() {
         const options = {
@@ -128,6 +132,44 @@ isolateHost(host,comment="Automated Isolation"){
                       return reject(body.reply.error)
                   }
                          
+              })
+          })
+    }
+    loadIOC(ioc){
+        const options = {
+            url: `https://${this.serverName}/${this._run_command_api_URL}`,
+            method: "POST",
+            headers: {
+                'Content-Type': 'application/json',
+                'COMMAND-NAME': this.commands.loadIOC,
+                'API-KEY': this.apiKey
+            } ,
+            body: { 
+                company: this.company,
+                severity: ioc.severity,
+                ioc_data: ioc.ioc_data,
+                source: ioc.source,
+                operations: ioc.operations,
+                artifacts_type: ioc.artifacts_type,
+                comment: ioc.comment
+             },
+            json: true ,
+            rejectUnauthorized:false
+          }; 
+          return new Promise(function(resolve,reject){
+              request.post(options,function(err,response,body){
+                  if (err){
+                      return reject(err)
+                  }
+				  if(response.statusCode>=400){
+                      return reject(body)
+                  }
+                  if (body==true){
+                      return resolve('Success')
+                  }
+                  if (body.reason) {
+                      return reject(body.reason)
+                  } 
               })
           })
     }

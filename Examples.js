@@ -1,6 +1,6 @@
 require('dotenv').load();
 var Secdo=require('./Secdo')
-
+var IOC=require('./IOC')
 
 var secdoClient = new Secdo({
     serverName: process.env.server_name,
@@ -29,9 +29,27 @@ var secdoClient = new Secdo({
 //         console.log(ex)
 //     })
 
-secdoClient.isolateHost('desktop').then((result)=> {
-    console.log(result)
+// secdoClient.isolateHost('desktop').then((result)=> {
+//     console.log(result)
+// })
+// .catch((ex)=>{
+//     console.log(ex)
+// })
+
+var newIOC = {
+    company: "secdo",
+    severity: IOC.severity.medium,
+    ioc_data: "Tom\n 127.18.0.3",
+    source: "Secdo  api",
+    operations: [IOC.operations.iceBlock,IOC.operations.case],
+    artifacts_type: IOC.artifactTypes.mixed,
+    comment: "This is my comment"
+}
+
+secdoClient.loadIOC(newIOC)
+.then((result)=>
+{console.log(result)
 })
 .catch((ex)=>{
-    console.log(ex)
+    console.error(ex)
 })
