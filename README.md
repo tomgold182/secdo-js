@@ -23,7 +23,7 @@ secdo-js is currently supporting the following actions:
 
 ### How To ###
 
-1. isntall the repo inside your project folder 
+1. cd in to your project folder and npm install this reposotory 
 ~~~ 
 npm install --save secdo-js
 ~~~
