@@ -1,7 +1,7 @@
 # secdo-js #
 
 
-Simple Secdo (Now Palo Alto) client which gives you the ability to perform various actions like getting Agent status,adding IOC's and isolating hosts.
+secdo-js is a Simple Secdo (Now Palo Alto) client which gives you the ability to perform various actions like getting Agent status,adding IOC's and isolating hosts.
 
 
 ### About ###
@@ -14,16 +14,16 @@ secdo-js is currently supporting the following actions:
 | Method | Description | Input | Successful Output 
 | ------ | ------ | ------ | ------ |
 | getAgents() | Retrieves list of all the agents in the system | - | Json formatted list of agents
-| isAgentInstalledOnHost(<host>) | gets and IP / Hostname and checks weather this host has a secdo agent installed | IP / Hostname | true / false
+| isAgentInstalledOnHost({host}) | gets and IP / Hostname and checks weather this host has a secdo agent installed | IP / Hostname | true / false
 | getAgentState(<Hostname/IP/Agent ID>) | Gets an host / IP / agent ID  and retrieves the agent state. Throws exception Secdo can not find this agent | IP / Hostname / Agent ID | status of this agent  
-| isolateHost(<Hostname>) | Gets an Hostname and isolates it . Throws an exception if the agent is not alive. | Hostname | 'Success' 
-| loadIOC(ioc) | Gets an IOC object and loads it to the system. Throws exception in a case when there is a duplicate or some invalid parameters  | IOC object (see Examples.js for more detailed example) | 'Success' 
+| isolateHost({Hostname}) | Gets an Hostname and isolates it . Throws an exception if the agent is not alive. | Hostname | 'Success' 
+| loadIOC({ioc}) | Gets an IOC object and loads it to the system. Throws exception in a case when there is a duplicate or some invalid parameters  | IOC object (see Examples.js for more detailed example) | 'Success' 
 | resetBlackListState() | Resets the black list state | - | 'Success
 
 
 ### How To ###
 
-1. isntall the repo inside your project folder 
+1. cd in to your project folder and npm install this reposotory 
 ~~~ 
 npm install --save secdo-js
 ~~~
