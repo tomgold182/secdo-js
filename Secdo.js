@@ -38,6 +38,7 @@ class Secdo{
           })
     }
     isAgentInstalledOnHost(host){
+        var isAgentFound= false;
         const options = {
             url: `https://${this.serverName}/${this._run_command_api_URL}`,
             method: "POST",
@@ -55,16 +56,18 @@ class Secdo{
                   if (err){
                       return reject(err)
                   }
-				  if(response.statusCode>=400){
+				  if(response.statusCode>299){
                       return reject(body)
                   }
                   var agents=body.agents
                 
                   agents.forEach(function(agent) {
-                      if (agent.interfaces.includes(host) || agent.hostName == host) {
-                          return resolve(true)
+                      if ((agent.interfaces.includes(host) || agent.hostName == host) && agent.agentStatus!='dead') {
+                        isAgentFound=true  
+                        return resolve(true)
                       }
                   })
+                  if(!isAgentFound)
                   return resolve(false)         
               })
           })
