@@ -1,6 +1,6 @@
 {
   "name": "secdo-js",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "Simple Secdo (Now Palo Alto) client which gives you the ability to perform various actions like getting Agent status,adding IOC's and isolating hosts.",
   "main": "Secdo.js",
   "scripts": {
