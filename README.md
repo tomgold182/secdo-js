@@ -31,7 +31,7 @@ npm install --save secdo-js
 ~~~
 2. require the Secdo class. If you are going to use the IOC functionalities , you can use the IOC var (which acts like an enum and provides the available params for the load IOC method) from the examples.js file to avoid mistakes.
 ~~~
-var Secdo=require('Secdo')
+var Secdo=require('secdo-js')
 ~~~
  3.Set the connection
 ~~~
